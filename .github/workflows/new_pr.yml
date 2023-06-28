@@ -1,0 +1,28 @@
+name: Create Pull Request
+on:
+  workflow_dispatch: # Manually trigger the workflow
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest # Replace with your desired runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create Pull Request
+        run: |
+          # Set the source and destination branch names as variables
+          SOURCE_BRANCH=<<master>>
+          DESTINATION_BRANCH=<<new-branche>>
+
+          # Create the pull request
+          REPO=$(basename $(git remote get-url origin) .git)
+          HUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          hub pr create \
+            --base $DESTINATION_BRANCH \
+            --head $SOURCE_BRANCH \
+            --message "Pull request from $SOURCE_BRANCH to $DESTINATION_BRANCH" \
+            --remote-name $REPO \
+            --browse \
+            --labels "automated"
