@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:latest
+      run: docker build . --file Dockerfile --tag benakiva/node-hello:latest
     - name: run & test Container
       run: docker run -itd --name node-hello -p 3000:3000  benakiva/node-hello:latest
     - run: sleep 5 && curl localhost:3000
