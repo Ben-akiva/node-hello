@@ -1,5 +1,6 @@
 name: Pull Request Action
 on:
+  workflow_dispatch:
   push:
     branches:
       - feature/*
@@ -8,6 +9,7 @@ jobs:
   create-pull-request:
     runs-on: ubuntu-latest
     steps:
+    
       - name: Check out repository code
         uses: actions/checkout@v2
         with:
