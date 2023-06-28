@@ -17,6 +17,13 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:latest
     - name: run & test Container
-      run: docker run -itd --name node-hello -p 3000:3000   my-image-name:latest
+      run: docker run -itd --name node-hello -p 3000:3000  benakiva/node-hello:latest
     - run: sleep 5 && curl localhost:3000
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: docker push
+      run: docker push benakiva/node-hello:latest
     
