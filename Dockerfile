@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:20.4
 ARG DEVOPS-LEVEL
 MAINTAINER Lidor G
 WORKDIR /usr/app
